@@ -1,0 +1,103 @@
+/*------------------------------------------------------------
+  Dracula powermenu — rofi 1.7+
+  Grid of icon buttons: Shutdown · Reboot · Suspend ·
+  Hibernate · Lock · Logout
+------------------------------------------------------------*/
+* {
+    bg:        #282a36;
+    bg-alt:    #44475a;
+    fg:        #f8f8f2;
+    comment:   #6272a4;
+    purple:    #bd93f9;
+    pink:      #ff79c6;
+    cyan:      #8be9fd;
+    green:     #50fa7b;
+    orange:    #ffb86c;
+    red:       #ff5555;
+    yellow:    #f1fa8c;
+
+    font: "JetBrainsMono Nerd Font 10";
+}
+
+window {
+    location: center;
+    anchor: center;
+    width: 660px;
+    padding: 26px 24px 24px;
+    border: 2px;
+    border-color: #bd93f959;
+    border-radius: 24px;
+    background-color: #282a36f2;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ inputbar, listview ];
+    spacing: 20px;
+}
+
+/* Title row */
+inputbar {
+    background-color: transparent;
+    children: [ prompt ];
+    padding: 0 6px;
+}
+
+prompt {
+    background-color: transparent;
+    font: "JetBrainsMono Nerd Font Bold 16";
+    text-color: @purple;
+}
+
+/* Button grid */
+listview {
+    background-color: transparent;
+    columns: 6;
+    lines: 1;
+    spacing: 12px;
+    cycle: true;
+    scrollbar: false;
+    dynamic: false;
+    fixed-height: true;
+}
+
+element {
+    orientation: vertical;
+    children: [ element-icon, element-text ];
+    spacing: 10px;
+    padding: 18px 4px 14px;
+    border: 2px;
+    border-color: transparent;
+    border-radius: 16px;
+    background-color: transparent;
+    text-color: @comment;
+    cursor: pointer;
+}
+
+element-icon {
+    size: 48px;
+    background-color: @bg-alt;
+    border-radius: 14px;
+    horizontal-align: 0.5;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+
+element selected {
+    background-color: @bg-alt;
+    border-color: @purple;
+    text-color: @fg;
+}
+
+element selected element-icon {
+    background-color: #282a36;
+}
+
+element selected element-text {
+    text-color: @fg;
+}

@@ -1,0 +1,250 @@
+-- LEADER
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- OPTIONS
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.termguicolors = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.undofile = true
+vim.opt.swapfile = false
+vim.opt.signcolumn = "yes"
+vim.opt.wrap = false
+vim.opt.scrolloff = 8
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
+
+-- PLUGINS (native vim.pack.add - Neovim 0.12+)
+vim.pack.add({
+  { src = "https://github.com/folke/tokyonight.nvim" },
+  { src = "https://github.com/nvim-lualine/lualine.nvim" },
+  { src = "https://github.com/nvim-tree/nvim-web-devicons" },
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+  { src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
+  { src = "https://github.com/L3MON4D3/LuaSnip" },
+  { src = "https://github.com/rafamadriz/friendly-snippets" },
+  { src = "https://github.com/zbirenbaum/copilot.lua" },
+  { src = "https://github.com/stevearc/conform.nvim" },
+  { src = "https://github.com/akinsho/toggleterm.nvim" },
+  { src = 'https://forge.barrettruth.com/barrettruth/live-server.nvim' },
+  { src = "https://github.com/windwp/nvim-autopairs" },
+  { src = "https://github.com/numToStr/Comment.nvim" },
+  { src = "https://github.com/nvim-telescope/telescope.nvim" },
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
+  { src = "https://github.com/MunifTanjim/nui.nvim" },
+  { src = "https://github.com/nvim-neo-tree/neo-tree.nvim" },
+  { src = "https://github.com/akinsho/bufferline.nvim" },
+})
+
+-- THEME & UI
+--vim.cmd.colorscheme("tokyonight-night")
+--require("lualine").setup({ options = { theme = "tokyonight", globalstatus = true } })
+--require("nvim-autopairs").setup()
+--require("Comment").setup()
+
+vim.cmd.colorscheme("tokyonight-night")
+require("lualine").setup({ options = { theme = "tokyonight", globalstatus = true } })
+require("bufferline").setup({
+  options = {
+    mode = "buffers",
+    diagnostics = "nvim_lsp",
+    separator_style = "thin",
+    always_show_bufferline = true,
+  }
+})
+require("nvim-autopairs").setup()
+require("Comment").setup()
+
+-- TREESITTER
+require("nvim-treesitter").setup({
+  ensure_installed = { "lua", "python", "html", "css", "javascript", "bash" },
+  highlight = { enable = true },
+  indent = { enable = true },
+})
+
+-- NEO-TREE
+require("neo-tree").setup({
+  close_if_last_window = true,
+  popup_border_style = "rounded",
+  enable_git_status = true,
+  enable_diagnostics = true,
+  filesystem = {
+    filtered_items = { visible = true, hide_dotfiles = false, hide_gitignored = false, hide_hidden = false },
+    follow_current_file = { enabled = true, leave_dirs_open = true },
+    use_libuv_file_watcher = true,
+  },
+  window = {
+    width = 20,
+    mappings = {
+      ["<space>"] = "none",
+      ["o"] = "open", ["<cr>"] = "open", ["S"] = "open_split", ["s"] = "open_vsplit",
+      ["c"] = "close_node", ["z"] = "close_all_nodes", ["a"] = { "toggle_node", nowait = false },
+      ["A"] = "add", ["d"] = "delete", ["r"] = "rename",
+      ["y"] = "copy_to_clipboard", ["x"] = "cut_to_clipboard", ["p"] = "paste_from_clipboard",
+      ["R"] = "refresh", ["?"] = "show_help", ["H"] = "toggle_hidden",
+    }
+  }
+})
+
+-- TABS / BUFFERS AT TOP (like VS Code)
+--require("bufferline").setup({
+--  options = {
+--    mode = "buffers", -- show buffers, not real tabs
+--    diagnostics = "nvim_lsp",
+--    show_buffer_close_icons = true,
+--    show_close_icon = false,
+--    separator_style = "thin",
+--    always_show_bufferline = true,
+--  }
+--})
+require("bufferline").setup({
+  options = {
+    mode = "buffers",
+    diagnostics = "nvim_lsp",
+    separator_style = "thin",
+    always_show_bufferline = true,
+    custom_filter = function(buf)
+      -- hide [No Name]
+      if vim.fn.bufname(buf) == "" then
+        return false
+      end
+      return true
+    end,
+  }
+})
+
+-- Tab navigation like VS Code
+local map = vim.keymap.set
+map("n", "<C-n>", ":BufferLineCycleNext<CR>", { desc = "Next Tab" })
+map("n", "<C-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Prev Tab" })
+map("n", "<leader>bd", ":bdelete<CR>", { desc = "Close Tab" })
+map("n", "<leader>bp", ":BufferLinePick<CR>", { desc = "Pick Tab" })
+
+-- TELESCOPE
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Find Word" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find Buffers" })
+
+-- LIVE SERVER
+vim.g.live_server = { enabled = true, port = 8080, browser_command = "" }
+
+-- COPILOT
+require("copilot").setup({
+  suggestion = { enabled = true, auto_trigger = true, keymap = { accept = "<Tab>", next = "<M-]>", prev = "<M-[>" } },
+  panel = { enabled = false },
+})
+
+-- FORMATTER
+require("conform").setup({
+  formatters_by_ft = { lua = { "stylua" }, python = { "black" }, javascript = { "prettier" }, html = { "prettier" }, css = { "prettier" } },
+  format_on_save = { timeout_ms = 500, lsp_fallback = true },
+})
+
+-- TERMINAL
+require("toggleterm").setup({ size = 15, open_mapping = [[<C-\>]], direction = "float", float_opts = { border = "curved" } })
+
+-- MASON + LSP
+require("mason").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { "lua_ls", "pyright", "html", "cssls", "emmet_ls", "ts_ls" }
+})
+vim.lsp.config('emmet_ls', { filetypes = { "html", "css", "javascript", "javascriptreact", "typescriptreact" } })
+vim.lsp.config('lua_ls', { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
+vim.lsp.enable({ "lua_ls", "pyright", "html", "cssls", "emmet_ls", "ts_ls" })
+
+-- SNIPPETS + COMPLETION (VS Code like)
+require("luasnip.loaders.from_vscode").lazy_load()
+require("blink.cmp").setup({
+  keymap = { preset = "enter" },
+  snippets = { preset = 'luasnip' },
+  appearance = { nerd_font_variant = 'mono' },
+  sources = { default = { 'lsp', 'snippets', 'path', 'buffer' } },
+})
+vim.diagnostic.config({ virtual_text = true })
+
+-- KEYBINDINGS
+local map = vim.keymap.set
+map('n', '<C-n>', '<cmd>Neotree toggle<cr>', { desc = 'NeoTree Toggle' })
+map('n', '<leader>e', '<cmd>Neotree focus<cr>', { desc = 'NeoTree Focus' })
+map('n', '<leader>o', '<cmd>Neotree reveal<cr>', { desc = 'NeoTree Reveal File' })
+map('n', '<leader>gs', '<cmd>Neotree git_status toggle<cr>', { desc = 'NeoTree Git Status' })
+map('n', '<leader>be', '<cmd>Neotree buffers toggle<cr>', { desc = 'NeoTree Buffers' })
+map('n', '<leader>ll', '<cmd>LiveServerStart<cr>', { desc = 'live server start' })
+map('n', '<leader>ls', '<cmd>LiveServerStop<cr>', { desc = 'live server stop' })
+map("n", "<leader>fm", function() require("conform").format() end, { desc = "Format Code" })
+map("n", "<leader>tf", ":ToggleTerm direction=float<CR>", { desc = "Float Terminal" })
+map("n", "<leader>th", ":ToggleTerm direction=horizontal<CR>", { desc = "Horizontal Terminal" })
+map("n", "<leader>tv", ":ToggleTerm direction=vertical size=60<CR>", { desc = "Vertical Terminal" })
+map("t", "<Esc>", [[<C-\><C-n>]])
+map("t", "jk", [[<C-\><C-n>]])
+map("n", "<leader>w", ":w<CR>", { desc = "Save" })
+map("n", "<leader>q", ":q<CR>", { desc = "Quit" })
+map("n", "<C-s>", ":w<CR>", { desc = "Save" })
+map("i", "jk", "<Esc>", { desc = "jk to Escape" })
+map("n", "<C-h>", "<C-w>h", { desc = "Go Left Window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Go Down Window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Go Up Window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Go Right Window" })
+map("n", "<C-Up>", ":resize +2<CR>")
+map("n", "<C-Down>", ":resize -2<CR>")
+map("n", "<C-Left>", ":vertical resize -2<CR>")
+map("n", "<C-Right>", ":vertical resize +2<CR>")
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
+
+-- LSP KEYMAPS
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local m = function(mode, lhs, rhs, desc) vim.keymap.set(mode, lhs, rhs, { buffer = args.buf, desc = desc }) end
+    m("n", "gd", vim.lsp.buf.definition, "Go to Definition")
+    m("n", "gr", builtin.lsp_references, "Go to References")
+    m("n", "K", vim.lsp.buf.hover, "Hover Info")
+    m("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+    m("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+  end,
+})
+
+-- AUTO OPEN NEO-TREE ON DIRECTORY
+--vim.api.nvim_create_autocmd("VimEnter", {
+--  callback = function()
+--    if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+--      require("neo-tree.command").execute({ action = "show" })
+--    end
+--  end
+
+-- Auto open neo-tree and delete [No Name]
+--vim.api.nvim_create_autocmd("VimEnter", {
+--  callback = function(data)
+--    local dir = data.file
+--    if dir and vim.fn.isdirectory(dir) ~= 0 then
+--      vim.cmd.cd(dir)
+--      require("neo-tree.command").execute({ action = "show" })
+      -- close the [No Name] buffer
+--      vim.cmd("bd")
+--    end
+--  end,
+--})
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function(data)
+    local dir = data.file
+    if dir and vim.fn.isdirectory(dir) ~= 0 then
+      vim.cmd.cd(dir)
+      vim.schedule(function()
+        require("neo-tree.command").execute({ action = "show" })
+        vim.cmd("bd")
+      end)
+    end
+  end,
+})

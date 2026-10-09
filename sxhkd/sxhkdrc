@@ -1,0 +1,36 @@
+super + Return
+       alacritty
+
+super + space
+      rofi -show drun -show-icons
+
+super + f 
+      pcmanfm
+
+super + b
+      firefox-esr
+
+super + v
+      pavucontrol
+
+super + h 
+      pamixer --increase 5
+
+super + l 
+      pamixer --decrease 5
+
+super + m 
+       pamixer --mute
+
+super + u 
+       pamixer --unmute
+
+
+# Focus a specific Openbox workspace (1-9)
+super + {1-9}
+    wmctrl -s $(( {1-9} - 1 ))
+
+# Send active window to a specific Openbox workspace (1-9)
+super + shift + {1-9}
+    wmctrl -r :ACTIVE: -t $(( {1-9} - 1 ))
+       

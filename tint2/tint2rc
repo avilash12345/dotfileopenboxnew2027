@@ -1,0 +1,421 @@
+#------------------------------------------------------------
+# tint2 — Catppuccin Mocha floating panel
+# Layout: workspaces (left) · clock (center) · cpu/mem/vol/
+#         disk/net + systray + power (right)
+#------------------------------------------------------------
+
+#-------------------------------------
+# Backgrounds
+#-------------------------------------
+# Background 1: Panel (floating pill)
+rounded = 14
+border_width = 1
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #1e1e2e 88
+border_color = #89b4fa 22
+background_color_hover = #1e1e2e 88
+border_color_hover = #89b4fa 22
+background_color_pressed = #1e1e2e 88
+border_color_pressed = #89b4fa 22
+
+# Background 2: Workspace (inactive)
+rounded = 12
+border_width = 0
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #313244 0
+border_color = #000000 0
+background_color_hover = #45475a 60
+border_color_hover = #000000 0
+background_color_pressed = #45475a 80
+border_color_pressed = #000000 0
+
+# Background 3: Workspace (active)
+rounded = 12
+border_width = 0
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #89b4fa 100
+border_color = #000000 0
+background_color_hover = #89b4fa 100
+border_color_hover = #000000 0
+background_color_pressed = #89b4fa 100
+border_color_pressed = #000000 0
+
+# Background 4: Task (default / iconified)
+rounded = 8
+border_width = 0
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #313244 0
+border_color = #000000 0
+background_color_hover = #313244 70
+border_color_hover = #000000 0
+background_color_pressed = #313244 90
+border_color_pressed = #000000 0
+
+# Background 5: Task (active) — pill with accent underline
+rounded = 8
+border_width = 2
+border_sides = B
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #313244 70
+border_color = #89b4fa 100
+background_color_hover = #45475a 80
+border_color_hover = #89b4fa 100
+background_color_pressed = #45475a 90
+border_color_pressed = #89b4fa 100
+
+# Background 6: Task (urgent)
+rounded = 8
+border_width = 0
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #f38ba8 80
+border_color = #000000 0
+background_color_hover = #f38ba8 100
+border_color_hover = #000000 0
+background_color_pressed = #f38ba8 100
+border_color_pressed = #000000 0
+
+# Background 7: Executor pill
+rounded = 8
+border_width = 0
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #313244 60
+border_color = #000000 0
+background_color_hover = #45475a 80
+border_color_hover = #000000 0
+background_color_pressed = #45475a 100
+border_color_pressed = #000000 0
+
+# Background 8: Clock
+rounded = 8
+border_width = 0
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #313244 0
+border_color = #000000 0
+background_color_hover = #313244 60
+border_color_hover = #000000 0
+background_color_pressed = #313244 80
+border_color_pressed = #000000 0
+
+# Background 9: Power button
+rounded = 8
+border_width = 0
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #f38ba8 15
+border_color = #000000 0
+background_color_hover = #f38ba8 40
+border_color_hover = #000000 0
+background_color_pressed = #f38ba8 60
+border_color_pressed = #000000 0
+
+# Background 10: Tooltip
+rounded = 8
+border_width = 1
+border_sides = TBLR
+border_content_tint_weight = 0
+background_content_tint_weight = 0
+background_color = #11111b 95
+border_color = #89b4fa 35
+background_color_hover = #11111b 95
+border_color_hover = #89b4fa 35
+background_color_pressed = #11111b 95
+border_color_pressed = #89b4fa 35
+
+#-------------------------------------
+# Panel
+#-------------------------------------
+panel_items = T:C:EEEEESP
+panel_size = 100% 40
+panel_margin = 6 0
+panel_padding = 8 2 5
+panel_background_id = 1
+wm_menu = 1
+panel_dock = 0
+panel_pivot_struts = 0
+panel_position = top center horizontal
+panel_layer = top
+panel_monitor = all
+panel_shrink = 0
+autohide = 0
+autohide_show_timeout = 0
+autohide_hide_timeout = 0.5
+autohide_height = 2
+strut_policy = follow_size
+panel_window_name = tint2
+disable_transparency = 0
+mouse_effects = 1
+font_shadow = 0
+mouse_hover_icon_asb = 100 0 10
+mouse_pressed_icon_asb = 100 0 -10
+scale_relative_to_dpi = 0
+scale_relative_to_screen_height = 0
+
+#-------------------------------------
+# Taskbar / Workspaces
+#-------------------------------------
+taskbar_mode = multi_desktop
+taskbar_hide_if_empty = 0
+taskbar_padding = 2 1 3
+taskbar_background_id = 0
+taskbar_active_background_id = 0
+taskbar_name = 1
+taskbar_hide_inactive_tasks = 1
+taskbar_hide_different_monitor = 0
+taskbar_hide_different_desktop = 0
+taskbar_always_show_all_desktop_tasks = 0
+taskbar_name_padding = 10 2
+taskbar_name_background_id = 2
+taskbar_name_active_background_id = 3
+taskbar_name_font = JetBrainsMono Nerd Font Bold 10
+taskbar_name_font_color = #cdd6f4 100
+taskbar_name_active_font_color = #11111b 100
+taskbar_distribute_size = 0
+taskbar_sort_order = none
+task_align = left
+
+#-------------------------------------
+# Task
+#-------------------------------------
+task_text = 1
+task_icon = 0
+task_centered = 1
+urgent_nb_of_blink = 20
+task_maximum_size = 2 30
+task_padding = 0 0 0
+task_font = JetBrainsMono Nerd Font 10
+task_tooltip = 0
+task_thumbnail = 0
+task_thumbnail_size = 210
+task_font_color = #cdd6f4 0
+task_active_font_color = #ffffff 0
+task_urgent_font_color = #11111b 0
+task_iconified_font_color = #6c7086 0
+task_background_id = 0
+task_active_background_id = 0
+task_urgent_background_id = 0
+task_iconified_background_id = 0
+mouse_left = toggle_iconify
+mouse_middle = close
+mouse_right = none
+mouse_scroll_up = prev_task
+mouse_scroll_down = next_task
+
+#-------------------------------------
+# System tray
+#-------------------------------------
+systray_padding = 6 2 5
+systray_background_id = 0
+systray_sort = ascending
+systray_icon_size = 20
+systray_icon_asb = 100 0 0
+systray_monitor = 1
+systray_name_filter =
+
+#-------------------------------------
+# Clock (center)
+#-------------------------------------
+time1_format = %H:%M
+time1_font = JetBrainsMono Nerd Font Bold 13
+time1_timezone =
+time2_format = %a %d %b
+time2_font = JetBrainsMono Nerd Font 9
+time2_timezone =
+clock_font_color = #cdd6f4 100
+clock_padding = 10 0
+clock_background_id = 8
+clock_tooltip = %A, %d %B %Y
+clock_tooltip_timezone =
+clock_lclick_command = /home/avilash/.config/tint2/scripts/popup_calendar.py
+clock_rclick_command =
+clock_mclick_command =
+clock_uwheel_command =
+clock_dwheel_command =
+
+#-------------------------------------
+# Executor 1: CPU
+#-------------------------------------
+execp = new
+execp_command = /home/avilash/.config/tint2/scripts/cpu.sh
+execp_interval = 2
+execp_continuous = 0
+execp_has_icon = 0
+execp_cache_icon = 1
+execp_font = JetBrainsMono Nerd Font Bold 10
+execp_font_color = #89b4fa 100
+execp_padding = 9 1
+execp_background_id = 7
+execp_centered = 0
+execp_tooltip = CPU usage
+execp_lclick_command =
+execp_rclick_command =
+execp_mclick_command =
+execp_uwheel_command =
+execp_dwheel_command =
+
+#-------------------------------------
+# Executor 2: Memory
+#-------------------------------------
+execp = new
+execp_command = /home/avilash/.config/tint2/scripts/mem.sh
+execp_interval = 5
+execp_continuous = 0
+execp_has_icon = 0
+execp_cache_icon = 1
+execp_font = JetBrainsMono Nerd Font Bold 10
+execp_font_color = #a6e3a1 100
+execp_padding = 9 1
+execp_background_id = 7
+execp_centered = 0
+execp_tooltip = Memory usage
+execp_lclick_command =
+execp_rclick_command =
+execp_mclick_command =
+execp_uwheel_command =
+execp_dwheel_command =
+
+#-------------------------------------
+# Executor 3: Volume
+#-------------------------------------
+execp = new
+execp_command = /home/avilash/.config/tint2/scripts/volume.sh
+execp_interval = 1
+execp_continuous = 0
+execp_has_icon = 0
+execp_cache_icon = 1
+execp_font = JetBrainsMono Nerd Font Bold 10
+execp_font_color = #cba6f7 100
+execp_padding = 9 1
+execp_background_id = 7
+execp_centered = 0
+execp_tooltip = Volume · scroll to adjust · middle-click to mute
+execp_lclick_command = pavucontrol
+execp_rclick_command = pactl set-sink-mute @DEFAULT_SINK@ toggle
+execp_mclick_command = pactl set-sink-mute @DEFAULT_SINK@ toggle
+execp_uwheel_command = pactl set-sink-volume @DEFAULT_SINK@ +5%
+execp_dwheel_command = pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+#-------------------------------------
+# Executor 4: Disk
+#-------------------------------------
+execp = new
+execp_command = /home/avilash/.config/tint2/scripts/disk.sh
+execp_interval = 30
+execp_continuous = 0
+execp_has_icon = 0
+execp_cache_icon = 1
+execp_font = JetBrainsMono Nerd Font Bold 10
+execp_font_color = #f9e2af 100
+execp_padding = 9 1
+execp_background_id = 7
+execp_centered = 0
+execp_tooltip = Disk usage (/)
+execp_lclick_command = xdg-open /
+execp_rclick_command =
+execp_mclick_command =
+execp_uwheel_command =
+execp_dwheel_command =
+
+#-------------------------------------
+# Executor 5: Network
+#-------------------------------------
+execp = new
+execp_command = /home/avilash/.config/tint2/scripts/network.sh
+execp_interval = 2
+execp_continuous = 0
+execp_has_icon = 0
+execp_cache_icon = 1
+execp_font = JetBrainsMono Nerd Font Bold 10
+execp_font_color = #fab387 100
+execp_padding = 9 1
+execp_background_id = 7
+execp_centered = 0
+execp_tooltip = Network down / up speed
+execp_lclick_command = nm-connection-editor
+execp_rclick_command =
+execp_mclick_command =
+execp_uwheel_command =
+execp_dwheel_command =
+
+#-------------------------------------
+# Battery (hidden on desktops)
+#-------------------------------------
+battery_tooltip = 1
+battery_low_status = 15
+battery_low_cmd = notify-send 'tint2: Battery low!'
+battery_full_cmd =
+battery_font_color = #cdd6f4 100
+bat1_format =
+bat2_format =
+battery_padding = 1 0
+battery_background_id = 0
+battery_hide = 98
+battery_lclick_command =
+battery_rclick_command =
+battery_mclick_command =
+battery_uwheel_command =
+battery_dwheel_command =
+ac_connected_cmd =
+ac_disconnected_cmd =
+
+#-------------------------------------
+# Separator 1: invisible spacer between workspaces and clock
+#-------------------------------------
+separator = new
+separator_background_id = 0
+separator_color = #000000 0
+separator_style = empty
+separator_size = 178
+separator_padding = 0 0
+
+#-------------------------------------
+# Separator 2: invisible spacer between clock and status pills
+#-------------------------------------
+separator = new
+separator_background_id = 0
+separator_color = #000000 0
+separator_style = empty
+separator_size = 140
+separator_padding = 0 0
+
+#-------------------------------------
+# Button 1: Power
+#-------------------------------------
+button = new
+button_text = 󰐥
+button_lclick_command = /home/avilash/.config/tint2/scripts/powermenu.sh
+button_rclick_command =
+button_mclick_command =
+button_uwheel_command =
+button_dwheel_command =
+button_font = JetBrainsMono Nerd Font 12
+button_font_color = #f38ba8 100
+button_padding = 10 1
+button_background_id = 9
+button_centered = 1
+button_max_icon_size = 0
+button_tooltip = Power menu
+
+#-------------------------------------
+# Tooltip
+#-------------------------------------
+tooltip_show_timeout = 0.4
+tooltip_hide_timeout = 0.1
+tooltip_padding = 8 5
+tooltip_background_id = 10
+tooltip_font_color = #cdd6f4 100
