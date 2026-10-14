@@ -4,7 +4,7 @@ super + Return
 super + space
       rofi -show drun -show-icons
 
-super + f 
+super + e 
       pcmanfm
 
 super + b
@@ -33,4 +33,13 @@ super + {1-9}
 # Send active window to a specific Openbox workspace (1-9)
 super + shift + {1-9}
     wmctrl -r :ACTIVE: -t $(( {1-9} - 1 ))
-       
+#full screen active window 
+super + f 
+   wmctrl -r :ACTIVE: -b toggle,fullscreen
+
+#maximize
+super + shift + f 
+   wmctrl -r :ACTIVE: -b toggle,maximized_vert,maximized_horz
+
+#close  active window
+# alt + F4 is the inbuild closing of the window so i can remove the key binding
