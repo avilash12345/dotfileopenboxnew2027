@@ -111,7 +111,7 @@ require("onedarkpro").setup({
     keywords = "bold,italic",
   },
   options = {
-    transparency = false, -- set true for transparent
+    transparency = true, -- set true for transparent
     cursorline = true,
   }
 })
@@ -140,12 +140,28 @@ require("bufferline").setup({
     always_show_bufferline = true,
     show_buffer_close_icons = true,
     show_close_icon = false,
+    offset = {
+      {
+        filetype = "neo-tree",
+        text = "File Explorer",
+        highlight = "Directory",
+        text_align = "left",
+        separator = true,
+      }
+    },
     -- HIDE [No Name]
     custom_filter = function(buf)
       return vim.fn.bufname(buf) ~= ""
     end,
   }
 })
+
+--bufferline keymaps
+--local map = vim.keymap.set
+local o = { noremap = true, silent = true }
+map("n", "<C-1>", "<cmd>bnext<cr>", o)
+map("n", "<C-2>", "<cmd>bprev<cr>", o)
+map("n", "<leader>x", "<cmd>bdelete<cr>", o)
 
 require("nvim-autopairs").setup()
 require("Comment").setup()
